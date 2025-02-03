@@ -9,8 +9,8 @@ export default function TabButton() {
         <Link key={route.to} to={route.to}>
           <button
             className={
-              "rounded-md border border-gray-500 bg-gray-100 px-3 py-1 hover:bg-gray-400 active:bg-gray-200" +
-              ` ${location.pathname === route.to && "bg-gray-400 text-white"}`
+              "px-3 py-1 " +
+              (location.pathname === route.to && "!bg-gray-400 text-white")
             }
           >
             {route.text}
