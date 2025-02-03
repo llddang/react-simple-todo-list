@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Todo } from "../types/types.dto";
+import { Todo } from "../types.dto";
 
 export interface TodosState {
   todos: Todo[];
@@ -22,12 +22,12 @@ export const todosSlice = createSlice({
       });
     },
     toggleTodo: (state, action: PayloadAction<number>) => {
-      state.todos = state.todos.map((t) =>
+      state.todos = state.todos.map((t: Todo) =>
         t.id === action.payload ? { ...t, done: !t.done } : t,
       );
     },
     deleteTodo: (state, action: PayloadAction<number>) => {
-      state.todos = state.todos.filter((t) => t.id !== action.payload);
+      state.todos = state.todos.filter((t: Todo) => t.id !== action.payload);
     },
   },
 });
