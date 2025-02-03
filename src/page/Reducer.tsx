@@ -1,7 +1,8 @@
 import { useReducer } from "react";
 import TabButton from "../components/TabButton";
-import InputForm from "../components/InputForm";
-import TodoList from "../components/TodoList";
+import TodoForm from "../components/reducer/TodoForm";
+import TodoList from "../components/reducer/TodoList";
+import todosReducer from "../todoReducer";
 
 export default function Reducer() {
   const [todos, dispatch] = useReducer(todosReducer, []);
@@ -21,7 +22,7 @@ export default function Reducer() {
   return (
     <div className="flex flex-col gap-5 p-4">
       <TabButton />
-      <InputForm onSubmit={handleAddTodo} />
+      <TodoForm onSubmit={handleAddTodo} />
       <TodoList
         todos={todos}
         handleToggleTodo={handleToggleTodo}
@@ -29,22 +30,4 @@ export default function Reducer() {
       />
     </div>
   );
-}
-
-function todosReducer(
-  todos: { id: number; text: string; done: boolean }[],
-  action: { type: "ADD" | "TOGGLE" | "DELETE"; id: number; text: string },
-) {
-  switch (action.type) {
-    case "ADD":
-      return [...todos, { id: action.id, text: action.text, done: false }];
-    case "TOGGLE":
-      return todos.map((t) =>
-        t.id === action.id ? { ...t, done: !t.done } : t,
-      );
-    case "DELETE":
-      return todos.filter((t) => t.id !== action.id);
-    default:
-      throw Error("Unknown action: " + action.type);
-  }
 }

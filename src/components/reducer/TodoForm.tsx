@@ -1,19 +1,15 @@
 import { useState } from "react";
 
-interface InputFormProps {
+interface TodoFormProps {
   onSubmit: (text: string) => void;
 }
 
-export default function InputForm({ onSubmit }: InputFormProps) {
+export default function TodoForm({ onSubmit }: TodoFormProps) {
   const [text, setText] = useState<string>("");
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     onSubmit(text);
-    resetTodo();
-  }
-
-  function resetTodo() {
     setText("");
   }
 
